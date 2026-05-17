@@ -1,0 +1,654 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+  --google-bg: #ffffff;
+  --google-surface: #ffffff;
+  --google-surface-hover: #f8f9fa;
+  --google-surface-active: #f1f3f4;
+  --google-border: #e0e0e0;
+  --google-text-primary: #202124;
+  --google-text-secondary: #5f6368;
+  --google-blue: #1a73e8;
+  --google-blue-hover: #1b66c9;
+  --google-blue-bg: #e8f0fe;
+  --google-green: #188038;
+  --google-green-bg: #e6f4ea;
+  --google-red: #d93025;
+  --google-red-bg: #fce8e6;
+  --google-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+  --google-shadow-hover: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+  --primary-color: #d93025;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: var(--google-text-primary);
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.top-nav {
+  height: 72px;
+  background: var(--google-surface);
+  border-bottom: 1px solid var(--google-border);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--google-text-primary);
+  text-decoration: none;
+}
+
+.logo-icon {
+  color: var(--primary-color);
+  margin-right: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  color: var(--google-text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: var(--google-surface-active);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-search {
+  background: var(--google-surface-active);
+  border: 1px solid transparent;
+  border-radius: 24px;
+  padding: 10px 20px;
+  width: 300px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.nav-search:focus {
+  background: var(--google-surface);
+  border-color: var(--google-border);
+  box-shadow: var(--google-shadow);
+  outline: none;
+}
+
+/* Main Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* --- Hero Section & Standard Pages --- */
+.hero {
+  position: relative;
+  height: 400px;
+  background-color: #202124;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 24px;
+}
+
+.hero h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 32px;
+  opacity: 0.9;
+}
+
+.hero-search-container {
+  display: flex;
+  background: white;
+  border-radius: 8px;
+  padding: 4px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.hero-search-input {
+  flex: 1;
+  border: none;
+  padding: 16px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.hero-search-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: var(--google-text-primary);
+}
+
+.bike-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.bike-card {
+  background: white;
+  border: 1px solid var(--google-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.bike-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--google-shadow-hover);
+}
+
+.bike-img-placeholder {
+  height: 160px;
+  background-color: var(--google-surface-active);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--google-text-secondary);
+  font-size: 14px;
+}
+
+.bike-details {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bike-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.bike-price {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.bike-meta {
+  font-size: 13px;
+  color: var(--google-text-secondary);
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+
+.ai-badge-good {
+  background-color: var(--google-green-bg);
+  color: var(--google-green);
+  border: 1px solid rgba(24,128,56,0.2);
+}
+
+.ai-badge-warning {
+  background-color: var(--google-red-bg);
+  color: var(--google-red);
+  border: 1px solid rgba(217,48,37,0.2);
+}
+
+.ai-badge-neutral {
+  background-color: var(--google-blue-bg);
+  color: var(--google-blue);
+  border: 1px solid rgba(26,115,232,0.2);
+}
+
+/* --- AI Advisor Specialized UI (Pinterest Layout) --- */
+.advisor-container {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Initial Pinterest State */
+.advisor-initial-pinterest {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 72px);
+  overflow: hidden;
+  background-color: #e9ecef;
+}
+
+/* Pinterest Background Animation */
+.pinterest-bg-wrapper {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+}
+
+.pinterest-bg-track {
+  display: flex;
+  flex-direction: column;
+  animation: scrollPinterest 60s linear infinite;
+}
+
+@keyframes scrollPinterest {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); } 
+}
+
+/* CSS Columns for Pinterest Look */
+.pinterest-columns {
+  column-count: 4;
+  column-gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+@media (max-width: 1200px) { .pinterest-columns { column-count: 3; } }
+@media (max-width: 800px) { .pinterest-columns { column-count: 2; } }
+@media (max-width: 500px) { .pinterest-columns { column-count: 1; } }
+
+.pinterest-card {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  border: 2px solid transparent;
+}
+
+.pinterest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+  border-color: var(--primary-color);
+}
+
+.pinterest-img {
+  background: var(--google-surface-active);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  width: 100%;
+}
+
+.pinterest-details {
+  padding: 16px;
+}
+
+/* Center Overlay */
+.advisor-hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  width: 90%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 48px;
+  border-radius: 32px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.5);
+  text-align: center;
+}
+
+.advisor-big-search {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 32px;
+  padding: 8px 8px 8px 16px;
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  margin-bottom: 24px;
+  border: 1px solid var(--google-border);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.advisor-big-search:focus-within {
+  box-shadow: 0 8px 32px rgba(26,115,232,0.15);
+  border-color: var(--google-blue);
+}
+
+.advisor-big-search input {
+  flex: 1;
+  border: none;
+  padding: 16px;
+  font-size: 18px;
+  outline: none;
+  background: transparent;
+}
+
+.advisor-big-search button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.advisor-big-search button:hover {
+  background: #c5221f;
+}
+
+.advisor-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  width: 100%;
+}
+
+.advisor-chip {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--google-border);
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  color: var(--google-text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.advisor-chip:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+/* Chat Layout View */
+.advisor-chat-layout {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 72px);
+  width: 100%;
+}
+
+.advisor-chat-history {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 120px;
+}
+
+.chat-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  align-items: flex-start;
+}
+
+.chat-row.user {
+  justify-content: flex-end;
+}
+
+.chat-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.ai-avatar {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.user-avatar {
+  background-color: var(--google-surface-active);
+  color: var(--google-text-primary);
+  font-weight: 500;
+}
+
+.chat-content-wrapper {
+  max-width: 85%;
+}
+
+.chat-bubble-user {
+  background-color: var(--google-blue-bg);
+  color: var(--google-text-primary);
+  padding: 14px 20px;
+  border-radius: 16px 16px 4px 16px;
+  font-size: 16px;
+}
+
+.chat-block-ai {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ai-text-response {
+  font-size: 16px;
+  color: var(--google-text-primary);
+  line-height: 1.6;
+}
+
+/* UI Components inside Chat */
+.ai-components-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.ai-bike-card {
+  background: white;
+  border: 1px solid var(--google-border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.ai-bike-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--google-shadow-hover);
+  border-color: var(--primary-color);
+}
+
+.ai-bike-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  background: var(--google-surface-active);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.ai-bike-info h4 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.ai-bike-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 4px;
+}
+
+.ai-bike-specs {
+  font-size: 12px;
+  color: var(--google-text-secondary);
+}
+
+/* Sticky Bottom Input */
+.advisor-sticky-input-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  background: linear-gradient(to top, #f8f9fa 80%, rgba(248, 249, 250, 0));
+}
+
+.advisor-sticky-input-container {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 32px;
+  padding: 8px 8px 8px 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  border: 1px solid var(--google-border);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.advisor-sticky-input-container:focus-within {
+  box-shadow: 0 6px 24px rgba(26,115,232,0.15);
+  border-color: var(--google-blue);
+}
+
+.advisor-sticky-input-container input {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  outline: none;
+  background: transparent;
+}
+
+.advisor-sticky-input-container button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.masonry-tag {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primary-color);
+  background: var(--google-red-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.masonry-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 4px 0;
+}
+
+.masonry-price {
+  font-size: 14px;
+  color: var(--google-text-secondary);
+}
+
+/* General Utilities */
+.flex { display: flex; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+.mt-4 { margin-top: 16px; }
+.mb-4 { margin-bottom: 16px; }
+.mt-8 { margin-top: 32px; }
