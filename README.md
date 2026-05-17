@@ -42,6 +42,31 @@ Utilizes local, highly efficient models (e.g., Gemma 4 / Llama 3 via Ollama) to 
 
 ---
 
+## AI/ML Pipeline & Models
+
+To power the futuristic UI, the platform relies on four distinct types of machine learning models acting in concert:
+
+### 1. Supervised Regression Models (The "Fair Value" Engine)
+- **Purpose:** Predicts what a bike *should* cost based entirely on its physical hardware (ignoring marketing hype). Used to calculate residual error and identify "Smart Deals" or "Overpriced" alerts.
+- **Algorithms:** **XGBoost Regressor** or **Random Forest Regressor**.
+- **Features:** `cc`, `mileage_kmpl`, `power_bhp`, `weight_kg`, `fuel_tank_liters`, `top_speed_kmh`.
+- **Target:** `predicted_ex_showroom_price`.
+
+### 2. Unsupervised Clustering Models (Competitor Grouping)
+- **Purpose:** Discovers mathematical "peer groups" instead of relying on rigid, traditional marketing segments. It might discover that a premium 150cc actually competes against a budget 200cc.
+- **Algorithms:** **HDBSCAN** (handles varying cluster densities and outliers efficiently).
+- **Features:** Normalized multi-dimensional vectors combining performance, price, and economy.
+
+### 3. Explainable AI Wrappers (XAI)
+- **Purpose:** Provides complete transparency to the user. Breaks down the exact engineering specs that pulled the AI Value Score up or down (e.g., "Engine CC: +15, Mileage: -5").
+- **Algorithms:** **SHAP** (SHapley Additive exPlanations) wrapped around the core XGBoost regressor.
+
+### 4. Agentic Large Language Models (AI Bike Advisor)
+- **Purpose:** Powers the conversational, context-aware interface. Understands user intent, filters the SQL database, checks the Fair Value Engine, and returns intelligent, conversational UI components.
+- **Algorithms:** Local LLMs like **Llama 3 (8B)** or **Gemma 2** (via Ollama), integrated with **LangChain** or **LlamaIndex** using Tool/Function calling capabilities.
+
+---
+
 ## Project File Structure
 
 ```text

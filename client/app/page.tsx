@@ -1,16 +1,22 @@
 import Link from "next/link";
 
-export default function Home() {
-  const smartDeals = [
-    { id: "1", name: "Bajaj Pulsar NS200", price: "₹1,49,000", imageText: "Pulsar NS200", badge: "AI Value: Excellent", badgeClass: "ai-badge-good", specs: "199cc | 36 kmpl" },
-    { id: "2", name: "Royal Enfield Classic", price: "₹1,93,000", imageText: "Classic 350", badge: "AI Value: Good", badgeClass: "ai-badge-good", specs: "349cc | 35 kmpl" },
-    { id: "4", name: "TVS Apache RTR 160", price: "₹1,20,000", imageText: "Apache 160", badge: "AI Value: Fair", badgeClass: "ai-badge-neutral", specs: "159cc | 45 kmpl" },
-  ];
+async function getFeaturedBikes() {
+  try {
+    const res = await fetch("http://localhost:8000/api/bikes/featured", { cache: "no-store" });
+    if (!res.ok) return [];
+    return res.json();
+  } catch (error) {
+    console.error("Failed to fetch featured bikes", error);
+    return [];
+  }
+}
 
-  const overpricedAlerts = [
-    { id: "3", name: "KTM Duke 390", price: "₹3,10,000", imageText: "Duke 390", badge: "AI Value: Low (Premium Pricing)", badgeClass: "ai-badge-warning", specs: "373cc | 28 kmpl" },
-    { id: "5", name: "Yamaha MT-15", price: "₹1,68,000", imageText: "MT-15", badge: "AI Value: Low (Brand Premium)", badgeClass: "ai-badge-warning", specs: "155cc | 48 kmpl" },
-  ];
+export default async function Home() {
+  const bikes = await getFeaturedBikes();
+  
+  // Split into smart deals and overpriced for UI demonstration
+  const smartDeals = bikes.filter((b: any) => b.ai_value_score >= 70).slice(0, 3);
+  const overpricedAlerts = bikes.filter((b: any) => b.ai_value_score < 70).slice(0, 2);
 
   return (
     <div>
@@ -38,38 +44,39 @@ export default function Home() {
         </div>
 
         <div className="bike-grid">
-          {smartDeals.map(bike => (
+          {smartDeals.map((bike: any) => (
             <Link href={`/bike/${bike.id}`} key={bike.id} className="bike-card">
-              <div className="bike-img-placeholder">{bike.imageText}</div>
+              <div className="bike-img-placeholder">{bike.model}</div>
               <div className="bike-details">
-                <div className="bike-title">{bike.name}</div>
-                <div className="bike-price">{bike.price} <span style={{fontSize: "12px", color: "var(--google-text-secondary)", fontWeight: 400}}>Onwards</span></div>
+                <div className="bike-title">{bike.brand} {bike.model}</div>
+                <div className="bike-price">₹{bike.ex_showroom_inr.toLocaleString('en-IN')} <span style={{fontSize: "12px", color: "var(--google-text-secondary)", fontWeight: 400}}>Onwards</span></div>
                 <div className="bike-meta">
-                  <span>{bike.specs}</span>
+                  <span>{bike.cc}cc | {bike.mileage_kmpl} kmpl</span>
                 </div>
-                <div className={`ai-badge ${bike.badgeClass}`}>
-                  ⭐ {bike.badge}
+                <div className={`ai-badge ${bike.ai_badge === 'Excellent' ? 'ai-badge-good' : 'ai-badge-neutral'}`}>
+                  ⭐ AI Value: {bike.ai_badge}
                 </div>
               </div>
             </Link>
           ))}
+          {smartDeals.length === 0 && <p style={{color: "var(--google-text-secondary)"}}>Make sure FastAPI backend is running.</p>}
         </div>
 
         <h2 className="section-title mt-8">Brand Premium Alerts (Overpriced)</h2>
         <p style={{marginBottom: "24px", color: "var(--google-text-secondary)"}}>Our AI models indicate these models charge a premium relative to their core specifications.</p>
         
         <div className="bike-grid">
-          {overpricedAlerts.map(bike => (
+          {overpricedAlerts.map((bike: any) => (
             <Link href={`/bike/${bike.id}`} key={bike.id} className="bike-card">
-              <div className="bike-img-placeholder">{bike.imageText}</div>
+              <div className="bike-img-placeholder">{bike.model}</div>
               <div className="bike-details">
-                <div className="bike-title">{bike.name}</div>
-                <div className="bike-price">{bike.price} <span style={{fontSize: "12px", color: "var(--google-text-secondary)", fontWeight: 400}}>Onwards</span></div>
+                <div className="bike-title">{bike.brand} {bike.model}</div>
+                <div className="bike-price">₹{bike.ex_showroom_inr.toLocaleString('en-IN')} <span style={{fontSize: "12px", color: "var(--google-text-secondary)", fontWeight: 400}}>Onwards</span></div>
                 <div className="bike-meta">
-                  <span>{bike.specs}</span>
+                  <span>{bike.cc}cc | {bike.mileage_kmpl} kmpl</span>
                 </div>
-                <div className={`ai-badge ${bike.badgeClass}`}>
-                  ⚠️ {bike.badge}
+                <div className="ai-badge ai-badge-warning">
+                  ⚠️ AI Value: {bike.ai_badge}
                 </div>
               </div>
             </Link>
